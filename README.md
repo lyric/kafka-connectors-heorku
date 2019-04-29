@@ -26,3 +26,8 @@ You will also need to create the Consumer Group `kafka-connect`
 
 * Apt: `https://github.com/heroku/heroku-buildpack-apt`
 * JVM: `heroku/jvm`
+
+### Setup
+
+heroku buildpacks:add --index 1 heroku-community/apt
+heroku buildpacks:add heroku/jvm
