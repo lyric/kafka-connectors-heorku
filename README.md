@@ -32,6 +32,7 @@ You will also need to create the Consumer Group `kafka-connect`
 ### Setup
 ## Using the app.json
 
+heroku kafka:topics:create pg-csa_cta
 
 ## Manually
 heroku config:set TRUSTSTORE_PASSWORD="trustypassword9"
@@ -45,5 +46,33 @@ https://devcenter.heroku.com/articles/exec#getting-started
 https://[appname].herokuapp.com/connectors
 
 
+Check the log for something like "INFO Added plugin 'io.confluent.connect.jdbc.JdbcSourceConnector'"
+
 ### JDBC connector info
 https://www.confluent.io/blog/kafka-connect-deep-dive-jdbc-source-connector
+https://docs.confluent.io/current/connect/managing/connectors.html#connect-bundled-connectors
+https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/index.html
+https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/source_config_options.html
+
+configure the connector
+
+curl -X POST -H "Content-Type: application/json" -d @jdbc-postgres-example.json "http://lyric-connect-jdbc.herokuapp.com/connectors"
+
+
+curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
+        "name": "jdbc_source_postgres_01",
+        "config": {
+                "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+                  "connection.url": "jdbc:postgresql://postgres:5432/postgres",
+                "connection.user": "connect_user",
+                "connection.password": "asgard",
+                "topic.prefix": "postgres-01-",
+                "mode":"bulk",
+                "poll.interval.ms" : 3600000
+                }
+        }'
+
+
+curl -X POST -H "Content-Type: application/json" -d @jdbc-source-with-schema.json "http://localhost:8083/connectors"
+...
+{"name":"jdbc-postgres-source-with-schema-connector","config":{"connector.class":"io.confluent.connect.jdbc.JdbcSourceConnector","tasks.max":"1","mode":"bulk","connection.url":"jdbc:postgresql://localhost:5432/customers?user=postgres&password=newpass","table.whitelist":"addresses","topic.prefix":"jdbc-postgresql-with-schema-example-","name":"jdbc-postgres-source-with-schema-connector"},"tasks":[],"type":null}
