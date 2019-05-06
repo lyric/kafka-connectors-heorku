@@ -24,5 +24,26 @@ You will also need to create the Consumer Group `kafka-connect`
 
 ### Buildpacks
 
-* Apt: `https://github.com/heroku/heroku-buildpack-apt`
+* Apt: `https://github.com/heroku/heroku-buildpack-apt` < TODO fails on keys https://github.com/heroku/heroku-buildpack-apt/pull/41
+* Apt: `heroku buildpacks:add --index=1 https://github.com/amiel/heroku-buildpack-apt#feature/support-adding-keys
+`
 * JVM: `heroku/jvm`
+
+### Setup
+## Using the app.json
+
+
+## Manually
+heroku config:set TRUSTSTORE_PASSWORD="trustypassword9"
+heroku config:set KEYSTORE_PASSWORD="keytrustypassword9"
+heroku buildpacks:add --index 1 heroku-community/apt
+heroku buildpacks:add heroku/jvm
+
+### Verify install
+heroku ps:exec 
+https://devcenter.heroku.com/articles/exec#getting-started
+https://[appname].herokuapp.com/connectors
+
+
+### JDBC connector info
+https://www.confluent.io/blog/kafka-connect-deep-dive-jdbc-source-connector
