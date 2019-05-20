@@ -1,9 +1,9 @@
 { "name": "jdbc-postgresql-example",
         "config": {
                 "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
-                "connection.url": "jdbc:postgresql://ec2-50-112-45-207.us-west-2.compute.amazonaws.com:5432/d2he1siftueili",
-                "connection.user": "u5mt2e57evjvau",
-                "connection.password": "pbd9680b8b136ca24e92c87d8c8c98768d677bd73aa3f445b59bc8fd504656cd5",
+                "connection.url": "jdbc:postgresql://hostxxxx",
+                "connection.user": "xxxx",
+                "connection.password": "xxxx",
                 "topic.prefix": "pg-",
                 "mode":"bulk"
                 }
