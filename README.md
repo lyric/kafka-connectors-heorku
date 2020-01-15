@@ -32,7 +32,7 @@ You will also need to create the Consumer Group `kafka-connect`
 ### Setup
 ## Using the app.json
 
-heroku kafka:topics:create pg-csa_cta
+heroku kafka:topics:create pg-[postgres table name]
 
 ## Manually
 heroku config:set TRUSTSTORE_PASSWORD="trustypassword9"
@@ -65,7 +65,7 @@ curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json
                 "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
                   "connection.url": "jdbc:postgresql://postgres:5432/postgres",
                 "connection.user": "connect_user",
-                "connection.password": "asgard",
+                "connection.password": "password",
                 "topic.prefix": "postgres-01-",
                 "mode":"bulk",
                 "poll.interval.ms" : 3600000
